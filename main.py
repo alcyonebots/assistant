@@ -1,4 +1,4 @@
-from pyrogram import Client
+from pyrogram import Client, filters
 import time
 
 # Assistant account's string session
@@ -7,30 +7,31 @@ STRING_SESSION = "BQAf70YATsjv3hYTvQpa6Mm5mnP2pUWyzUjVR4M7HhIIbvSUxqXfi1vmWf61M9
 # Owner's Telegram user ID
 OWNER_ID = 6663845789
 
-# Message you want to forward (replace with actual chat_id and message_id)
-SOURCE_CHAT_ID = -1002191323143
-SOURCE_MESSAGE_ID = 7
-
 app = Client("assistant", session_string=STRING_SESSION)
 
-@app.on_message()
-def broadcast(_, message):
-    if message.from_user and message.from_user.id != OWNER_ID:
+@app.on_message(filters.command("broadcast", prefixes=["/"]))
+async def broadcast(client, message):
+    if message.from_user.id != OWNER_ID:
+        await message.reply_text("🚫 You are not authorized to use this command.")
+        return
+    
+    if not message.reply_to_message:
+        await message.reply_text("Reply to a message you want to forward.")
         return
     
     start_time = time.time()
     total_chats = 0
     success_count = 0
     fail_count = 0
-    
-    for dialog in app.get_dialogs():
+
+    async for dialog in client.get_dialogs():
         chat_id = dialog.chat.id
         total_chats += 1
         try:
-            app.forward_messages(
+            await client.forward_messages(
                 chat_id=chat_id,
-                from_chat_id=SOURCE_CHAT_ID,
-                message_ids=SOURCE_MESSAGE_ID
+                from_chat_id=message.chat.id,
+                message_ids=message.reply_to_message.id
             )
             success_count += 1
         except Exception as e:
@@ -38,12 +39,12 @@ def broadcast(_, message):
             fail_count += 1
     
     elapsed_time = round(time.time() - start_time, 2)
-    print(
-        f"📢 Broadcast Summary\n"
-        f"Total Chats: {total_chats}\n"
-        f"Successful: {success_count}\n"
-        f"Failed: {fail_count}\n"
-        f"Time Taken: {elapsed_time} sec"
+    await message.reply_text(
+        f"📢 **Broadcast Summary**\n"
+        f"**Total Chats:** `{total_chats}`\n"
+        f"**Successful:** `{success_count}`\n"
+        f"**Failed:** `{fail_count}`\n"
+        f"**Time Taken:** `{elapsed_time} sec`"
     )
 
 app.run()
