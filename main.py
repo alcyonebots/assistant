@@ -8,8 +8,8 @@ STRING_SESSION = "BQAf70YATsjv3hYTvQpa6Mm5mnP2pUWyzUjVR4M7HhIIbvSUxqXfi1vmWf61M9
 OWNER_ID = 6663845789
 
 # Message you want to forward (replace with actual chat_id and message_id)
-SOURCE_CHAT_ID = -1001234567890
-SOURCE_MESSAGE_ID = 42
+SOURCE_CHAT_ID = -1002191323143
+SOURCE_MESSAGE_ID = 7
 
 app = Client("assistant", session_string=STRING_SESSION)
 
