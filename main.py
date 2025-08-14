@@ -2,10 +2,10 @@ from pyrogram import Client
 import time
 
 # Assistant account's string session
-STRING_SESSION = "YOUR_STRING_SESSION"
+STRING_SESSION = "BQAf70YATsjv3hYTvQpa6Mm5mnP2pUWyzUjVR4M7HhIIbvSUxqXfi1vmWf61M9OdssH8OyZLIC2ZhjfKKsaAESGStJCex1XhDMA6NEANvGr0X8i6Fv7-HzwpaffeVSY9Ub15xgutcgXC2Nr39vst2HpuXiFtztfXAs8LqcO5xdKxq1dFDe-HjPFVPWQta7Ypr5dapqnVBqSnmBP_aIda4_v4jkBq6oIibWOmR8b4tWkw56soT2tyRLOQ69vHAqScJ3reN4fk2vHnSFKDO78rCp-TxC7O5gEgSvJGmhi5Y1K_n8pLUZeHtuNtKLZPQnxNrWneUaiMppoVzfmbYBLBlx6uHHd8kAAAAAGRn950AA"
 
 # Owner's Telegram user ID
-OWNER_ID = 123456789
+OWNER_ID = 6663845789
 
 # Message you want to forward (replace with actual chat_id and message_id)
 SOURCE_CHAT_ID = -1001234567890
